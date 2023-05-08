@@ -41,7 +41,7 @@ if(${RHINO3DM_JS})
   # we will eventually want the following warning flags on both compiles
   # for now, just WASM
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-overloaded-virtual -Wno-switch -Wno-unknown-pragmas -Wno-unused-private-field")
-  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s MODULARIZE=1 -s EXPORT_NAME=rhino3dm")
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s MODULARIZE=1 -s EXPORT_NAME=rhino3dm -Oz")
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s ALLOW_MEMORY_GROWTH=1 --bind")
 endif()
 
@@ -110,6 +110,9 @@ if(${RHINO3DM_JS})
   install(FILES "build/javascript/rhino3dm.wasm" DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/build/artifacts_js")
 endif()
 
+#[[ 
+#for now, let's not worry about rhino3dm.module.js
+#remember to bring this back in script/build.py ln 458
 # patch rhino3dm.js using the supplied diff to produce rhino3dm.module.js
 if(${RHINO3DM_JS})
   find_program(PATCH patch)
@@ -122,3 +125,4 @@ if(${RHINO3DM_JS})
     COMMAND ${PATCH} ${CMAKE_BINARY_DIR}/rhino3dm.module.js ${CMAKE_CURRENT_SOURCE_DIR}/rhino3dm.module.js.diff
   )
 endif()
+]]
