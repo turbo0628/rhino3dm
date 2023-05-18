@@ -204,6 +204,7 @@ public:
   bool SetFace(int index, int vertex1, int vertex2, int vertex3) { return SetFace2(index, vertex1, vertex2, vertex3, vertex3); }
   bool SetFace2(int index, int vertex1, int vertex2, int vertex3, int vertex4);
   BND_TUPLE GetFace(int i) const;
+  BND_TUPLE GetFaceForBlender(int i, int offset = 0) const;
   //    public MeshFace this[int index]
   BND_TUPLE GetFaceVertices(int faceIndex) const;
 //    public BoundingBox GetFaceBoundingBox(int faceIndex)

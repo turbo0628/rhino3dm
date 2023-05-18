@@ -715,6 +715,25 @@ BND_TUPLE BND_MeshFaceList::GetFace(int i) const
   return rc;
 }
 
+BND_TUPLE BND_MeshFaceList::GetFaceForBlender(int i, int offset) const
+{
+  ON_MeshFace &face = m_mesh->m_F[i];
+  BND_TUPLE rc;
+  if (face.vi[2] == face.vi[3])
+  {
+    rc = CreateTuple(3);
+  }
+  else
+  {
+    rc = CreateTuple(4);
+  }
+  for (int i = 0; i < rc.size(); ++i)
+  {
+    SetTuple<int>(rc, i, face.vi[i] + offset);
+  }
+  return rc;
+}
+
 BND_TUPLE BND_MeshFaceList::GetFaceVertices(int faceIndex) const
 {
   int count = m_mesh->m_F.Count();
